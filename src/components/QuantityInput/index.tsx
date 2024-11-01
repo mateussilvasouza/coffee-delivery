@@ -1,5 +1,4 @@
 import { Minus, Plus } from "@phosphor-icons/react";
-import { useTheme } from "styled-components";
 import { Container } from "./style";
 
 interface QuantityInputProps {
@@ -12,7 +11,6 @@ export function QuantityInput({
   incrementQuantity,
   quantity,
 }: QuantityInputProps) {
-  const theme = useTheme();
   return (
     <Container>
       <button onClick={() => decrementQuantity()}>
