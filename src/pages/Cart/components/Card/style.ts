@@ -2,10 +2,10 @@ import { Trash } from "@phosphor-icons/react";
 import styled from "styled-components";
 
 export const CardContainer = styled.div`
-  display: flex;
+  display: inline-flex;
   align-items: start;
-  justify-content: space-between;
-  padding: 0.25rem 0.5rem;
+  justify-content: start;
+  gap: 0.5rem;
 
   div {
     display: flex;

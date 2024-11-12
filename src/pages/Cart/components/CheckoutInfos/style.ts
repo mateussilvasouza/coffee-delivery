@@ -4,10 +4,7 @@ export const CheckoutInfos = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-
-  @media (max-width: 48rem) {
-    width: 100vw;
-  }
+  min-width: 425px;
 `;
 
 export const AddressForm = styled.fieldset`
@@ -19,11 +16,23 @@ export const AddressForm = styled.fieldset`
   border-radius: 1rem;
   background-color: ${(props) => props.theme.colors["base-card"]};
 
+  @media (max-width: 425px) {
+    padding-left: 0;
+  }
   div:last-child {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     grid-gap: 1rem;
+
+    @media (max-width: 600px) {
+      display: flex;
+      flex-direction: column;
+
+      input:nth-child(7) {
+        width: 100%;
+      }
+    }
 
     input {
       padding: 0.8rem;
@@ -64,24 +73,6 @@ export const AddressForm = styled.fieldset`
     input:nth-child(7) {
       width: 4rem;
     }
-
-    @media (max-width: 48rem) and (min-width: 26.6rem) {
-      display: flex;
-      flex-direction: column;
-
-      input:nth-child(7) {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 27rem) {
-      display: flex;
-      flex-direction: column;
-
-      input:nth-child(7) {
-        width: 100%;
-      }
-    }
   }
 `;
 export const SubtitleForm = styled.div`
@@ -114,11 +105,6 @@ export const PaymentType = styled.div`
   gap: 1rem;
   padding: 1rem 0;
 
-  @media (max-width: 26.6rem) {
-    flex-direction: column;
-    align-items: start;
-  }
-
   label {
     display: flex;
     flex: 1;
@@ -145,5 +131,28 @@ export const PaymentType = styled.div`
   }
   span {
     font-size: ${(props) => props.theme["font-size"]["button-m"]};
+  }
+`;
+
+export const ErrorMessage = styled.span`
+  position: absolute;
+  bottom: -1.5rem;
+  left: 0;
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 10px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #f8d7da transparent;
   }
 `;

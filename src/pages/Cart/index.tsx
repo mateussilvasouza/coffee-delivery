@@ -16,11 +16,11 @@ import {
 
 const newCheckoutFormValidationSchema = z.object({
   cep: z.string().length(8).regex(/[0-9]/),
-  address: z.string(),
+  address: z.string().min(1),
   number: z.string().transform((val) => Number(val)),
   complement: z.string().nullable(),
-  neighborhood: z.string(),
-  city: z.string(),
+  neighborhood: z.string().min(1),
+  city: z.string().min(1),
   state: z.string().length(2),
   paymentType: z.enum(["credit", "debit", "money"]),
 });

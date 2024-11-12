@@ -5,6 +5,7 @@ export const CardContainer = styled.div`
   flex-direction: column;
   grid-gap: 1rem;
   align-items: center;
+  min-width: 256px;
   padding: 0 2rem;
   background-color: ${(props) => props.theme.colors["base-card"]};
   border-radius: 0.37rem 2.25rem;

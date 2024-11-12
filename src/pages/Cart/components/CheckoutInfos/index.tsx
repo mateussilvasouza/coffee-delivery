@@ -14,6 +14,7 @@ import { useViaCep } from "../../../../hooks/useCep";
 import {
   AddressForm,
   CheckoutInfos,
+  ErrorMessage,
   PaymentForm,
   PaymentType,
   SubtitleForm,
@@ -22,29 +23,43 @@ import {
 export const CheckoutForm = () => {
   const theme = useTheme();
   const { calculateDeliveryPrice } = useCart();
-  const { register, setValue, watch } = useFormContext<NewCheckoutFormData>();
-  const { fetchAddress, address } = useViaCep();
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useFormContext<NewCheckoutFormData>();
+  const { fetchAddress, error } = useViaCep();
   const { paymentType: selectedPayment } = watch();
-  const handleCepChange = async (event: React.FocusEvent<HTMLInputElement>) => {
+
+  const handleCepChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const cep = event.target.value.replace(/\D/g, "");
     if (cep.length === 8) {
-      await fetchAddress(cep);
-      if (address) {
+      const address = await fetchAddress(cep);
+      if (!!address) {
         setValue("address", address.logradouro);
         setValue("neighborhood", address.bairro);
         setValue("city", address.localidade);
         setValue("state", address.uf);
+        calculateDeliveryPrice(cep);
       }
-      calculateDeliveryPrice(cep);
+      if (!!error) {
+        setValue("address", "");
+        setValue("neighborhood", "");
+        setValue("city", "");
+        setValue("state", "");
+      }
     }
   };
-
+  console.log(errors);
   return (
     <CheckoutInfos id="checkoutInfo">
       <AddressForm>
         <SubtitleForm>
           <MapPinLine size={22} color={theme.colors["yellow-dark"]} />
-          <label htmlFor="">
+          <label>
             Endereço de Entrega
             <br />
             <span>Informe o endereço onde deseja receber seu pedido</span>
@@ -56,49 +71,59 @@ export const CheckoutForm = () => {
             {...register("cep")}
             required
             placeholder="CEP"
-            onBlur={handleCepChange}
+            onChange={handleCepChange}
           />
+          {errors.cep && <ErrorMessage>{errors.cep.message}</ErrorMessage>}
+
           <input
             type="text"
             {...register("address")}
             required
             placeholder="Rua"
-            readOnly
           />
+          {errors.address && (
+            <ErrorMessage>{errors.address.message}</ErrorMessage>
+          )}
+
           <input
             type="text"
             {...register("number")}
             required
             placeholder="Número"
-            readOnly
           />
+          {errors.number && (
+            <ErrorMessage>{errors.number.message}</ErrorMessage>
+          )}
+
           <input
             type="text"
             {...register("complement")}
             placeholder="Complemento"
-            readOnly
           />
+          {errors.complement && (
+            <ErrorMessage>{errors.complement.message}</ErrorMessage>
+          )}
+
           <input
             type="text"
             {...register("neighborhood")}
             required
             placeholder="Bairro"
-            readOnly
           />
+          {errors.neighborhood && (
+            <ErrorMessage>{errors.neighborhood.message}</ErrorMessage>
+          )}
+
           <input
             type="text"
             {...register("city")}
             required
             placeholder="Cidade"
-            readOnly
           />
-          <input
-            type="text"
-            {...register("state")}
-            required
-            placeholder="UF"
-            readOnly
-          />
+          {errors.city && <ErrorMessage>{errors.city.message}</ErrorMessage>}
+
+          <input type="text" {...register("state")} required placeholder="UF" />
+          {errors.state && <ErrorMessage>{errors.state.message}</ErrorMessage>}
         </div>
       </AddressForm>
       <PaymentForm>
@@ -135,6 +160,10 @@ export const CheckoutForm = () => {
                   setValue("paymentType", paymentType as PaymentTypes)
                 }
               />
+              {errors.paymentType && (
+                <ErrorMessage>{errors.paymentType.message}</ErrorMessage>
+              )}
+
               <span>
                 {paymentType === "credit"
                   ? "CARTÃO DE CRÉDITO"

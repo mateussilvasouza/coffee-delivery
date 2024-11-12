@@ -12,24 +12,23 @@ interface Address {
   erro?: boolean;
 }
 export function useViaCep() {
-  const [address, setAddress] = useState<Address | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchAddress = async (cep: string) => {
+  const fetchAddress = async (cep: string): Promise<Address | null> => {
     try {
       const response = await viaCepApi.get<Address>(`${cep}/json`);
       if (response.data.erro) {
         setError("CEP não encontrado");
-        setAddress(null);
+        return null;
       } else {
-        setAddress(response.data);
         setError(null);
+        return response.data;
       }
     } catch {
       setError("Erro ao buscar o CEP");
-      setAddress(null);
+      return null;
     }
   };
 
-  return { address, error, fetchAddress };
+  return { error, fetchAddress };
 }

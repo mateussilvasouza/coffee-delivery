@@ -8,6 +8,7 @@ export const HeaderContainer = styled.header<CartProps>`
   align-items: center;
   justify-content: space-between;
   padding: 2rem 0;
+  min-width: 425px;
 
   div {
     display: flex;
@@ -35,6 +36,7 @@ export const HeaderContainer = styled.header<CartProps>`
       position: relative;
       display: inline-block;
       padding: 0.4rem;
+      margin-right: 0.8rem;
       color: inherit;
       text-decoration: none;
       border-radius: 0.37rem;

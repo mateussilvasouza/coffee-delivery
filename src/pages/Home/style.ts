@@ -5,24 +5,27 @@ export const HeroContainer = styled.section`
   align-items: center;
   justify-content: space-between;
   height: 50vh;
+  gap: 1rem;
+  min-width: 425px;
 
-  @media (max-width: 48rem) and (min-width: 26.6rem) {
+  @media (max-width: 900px) {
+    img {
+      width: 300px;
+    }
+  }
+  @media (max-width: 767px) {
     display: flex;
     max-width: 100vw;
     height: 30vh;
+    margin-top: 3rem;
+
     img {
       display: none;
     }
   }
 
-  @media (max-width: 26.6rem) {
-    display: inline-flex;
-    max-width: 100vw;
-    height: 30vh;
-
-    img {
-      display: none;
-    }
+  @media (max-width: 425px) {
+    margin-top: 5rem;
   }
 `;
 
@@ -31,15 +34,17 @@ export const Hero = styled.div`
   flex-direction: column;
   justify-content: space-around;
   gap: 3rem;
+  flex-wrap: 1;
+  min-width: 425px;
 `;
 
 export const HeroContent = styled.section`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 35vw;
+  min-width: 425px;
 
-  @media (max-width: 48rem) {
+  @media (max-width: 600px) {
     max-width: 100vw;
     padding: 0 1rem;
   }
@@ -81,17 +86,24 @@ export const Info = styled.section`
 `;
 
 export const Catalogo = styled.section`
-  @media (max-width: 64rem) and (min-width: 49rem) {
+  min-width: 425px;
+
+  @media (max-width: 1200px) {
     padding: 0 1.2rem;
     margin-top: 3rem;
   }
 
-  @media (max-width: 48rem) and (min-width: 26.6rem) {
+  @media (max-width: 900px) {
     margin-top: 3rem;
     padding: 0 1.2rem;
   }
 
-  @media (max-width: 26.6rem) {
+  @media (max-width: 600px) {
+    margin-top: 6rem;
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 425px) {
     margin-top: 9rem;
     padding: 0 1rem;
   }
@@ -108,18 +120,20 @@ export const CoffeeList = styled.div`
   padding: 4rem 0;
   grid-gap: 3rem;
 
-  @media (max-width: 1024px) {
+  min-width: 425px;
+  @media (max-width: 1200px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
-  @media (max-width: 48rem) {
+  @media (max-width: 900px) {
     grid-template-columns: 1fr 1fr;
   }
 
-  @media (max-width: 26.6rem) {
+  @media (max-width: 600px) {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3rem;
+    min-width: 425px;
   }
 `;

@@ -5,12 +5,10 @@ export const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 74rem;
+  min-width: 425px;
 
-  @media (max-width: 64rem) {
-    max-width: 100vw;
-  }
-
-  @media (max-width: 48rem) {
-    max-width: 100vw;
+  @media (max-width: 1200px) {
+    max-width: 90vw;
+    margin: 0;
   }
 `;
